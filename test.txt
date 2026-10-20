@@ -1,0 +1,5 @@
+Hello, world!
+This is a test of get_next_line.
+Each line should be returned separately.
+Testing 1, 2, 3.
+Goodbye!
