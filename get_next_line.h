@@ -6,15 +6,15 @@
 /*   By: ccascava <ccascava@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 12:55:05 by ccascava          #+#    #+#             */
-/*   Updated: 2026/10/20 21:42:42 by ccascava         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:16:35 by ccascava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>
