@@ -6,7 +6,7 @@
 /*   By: ccascava <ccascava@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 12:52:16 by ccascava          #+#    #+#             */
-/*   Updated: 2026/10/20 22:09:36 by ccascava         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:12:54 by ccascava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,35 +123,4 @@ char	*get_next_line(int fd)
 	}
 	str = main_loop(fd, buffer, &head, &tail);
 	return (str);
-}
-
-
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-char *get_next_line(int fd);
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-	int		line_number;
-
-	fd = 42;
-	if (fd == -1)
-	{
-		perror("open");
-		return (1);
-	}
-	line_number = 1;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%d: [%s]\n", line_number, line);
-		free(line);
-		line_number++;
-	}
-	close(fd);
-	return (0);
 }
