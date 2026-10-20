@@ -6,7 +6,7 @@
 /*   By: ccascava <ccascava@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 12:57:04 by ccascava          #+#    #+#             */
-/*   Updated: 2026/10/20 16:44:56 by ccascava         ###   ########.fr       */
+/*   Updated: 2026/10/20 21:56:44 by ccascava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*stop_it(t_list **head, t_list **tail, char *buffer, int line_len)
 	if (!str)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
 	del(head, tail, line_len, str);
 	free(buffer);
@@ -95,7 +95,7 @@ char	*get_remaining(t_list **head, t_list **tail, char *buffer)
 	if (!remaining)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
 	del(head, tail, count, remaining);
 	return (remaining);
@@ -108,14 +108,14 @@ char	*check_res(int result, t_list **head, t_list **tail, char *buffer)
 	if (result == -1)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
 	else if (result == 0)
 	{
 		if (*head == NULL)
 		{
 			free(buffer);
-			return (0);
+			return (NULL);
 		}
 		else
 		{

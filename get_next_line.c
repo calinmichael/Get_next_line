@@ -6,7 +6,7 @@
 /*   By: ccascava <ccascava@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 12:52:16 by ccascava          #+#    #+#             */
-/*   Updated: 2026/10/20 16:57:56 by ccascava         ###   ########.fr       */
+/*   Updated: 2026/10/20 22:09:36 by ccascava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list	*assign_head(t_list **head, t_list **tail, char *buffer)
 	if (!new_node)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
 	*head = new_node;
 	*tail = new_node;
@@ -37,7 +37,7 @@ void	*append(t_list **tail, int j, char *buffer)
 	if (!new_node)
 	{
 		free(buffer);
-		return (0);
+		return (NULL);
 	}
 	(*tail)->next = new_node;
 	new_node->c = buffer[j];
@@ -102,10 +102,19 @@ char	*get_next_line(int fd)
 	static t_list	*tail;
 	char			*str;
 	char			*buffer;
+	int				test;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	buffer = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
-		return (0);
+		return (NULL);
+	test = read(fd, buffer, 0);
+	if (test == -1)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	if (head)
 	{
 		str = create_line(&head, &tail, buffer);
@@ -114,4 +123,35 @@ char	*get_next_line(int fd)
 	}
 	str = main_loop(fd, buffer, &head, &tail);
 	return (str);
+}
+
+
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+char *get_next_line(int fd);
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+	int		line_number;
+
+	fd = 42;
+	if (fd == -1)
+	{
+		perror("open");
+		return (1);
+	}
+	line_number = 1;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%d: [%s]\n", line_number, line);
+		free(line);
+		line_number++;
+	}
+	close(fd);
+	return (0);
 }
