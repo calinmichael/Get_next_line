@@ -6,7 +6,7 @@
 /*   By: ccascava <ccascava@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 12:52:16 by ccascava          #+#    #+#             */
-/*   Updated: 2026/10/20 22:12:54 by ccascava         ###   ########.fr       */
+/*   Updated: 2026/10/21 19:12:32 by ccascava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = malloc((size_t)BUFFER_SIZE + 1);
+	buffer = malloc((size_t)BUFFER_SIZE);
 	if (!buffer)
 		return (NULL);
 	test = read(fd, buffer, 0);
