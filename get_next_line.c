@@ -109,12 +109,6 @@ char	*get_next_line(int fd)
 	buffer = malloc((size_t)BUFFER_SIZE);
 	if (!buffer)
 		return (NULL);
-	test = read(fd, buffer, 0);
-	if (test == -1)
-	{
-		free(buffer);
-		return (NULL);
-	}
 	if (head)
 	{
 		str = create_line(&head, &tail, buffer);
@@ -124,3 +118,33 @@ char	*get_next_line(int fd)
 	str = main_loop(fd, buffer, &head, &tail);
 	return (str);
 }
+
+/*
+#include <fcntl.h>
+#include <stdio.h>
+
+int main(int argc, char **argv)
+{
+	int fd;
+	char *line;
+
+	if (argc < 2)
+	{
+		printf("No file provided. Reading from standard input.\n");
+		fd = 0; // Read from standard input if no file is provided
+	}
+	else
+	{
+		fd = open(argv[1], O_RDONLY);
+	}
+	printf("Every time you press enter, you get a line from the file \n\n");
+	line = malloc(1);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		if (fd)
+			getchar();
+		printf("%s", line);
+	}
+}*/
